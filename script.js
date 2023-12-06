@@ -24,14 +24,9 @@ const gameBoard = (function () {
 
     function playerMakesMove(row,col) {
         const availableMoves = listAvailableMoves();
-        console.log(availableMoves);
         const containsRowCol = availableMoves.some((pair) => pair[0] === row && pair[1] === col);
-        if (!containsRowCol || row > 2 || col > 2) {
-            console.log("illegal move");
-            console.log(board);
-        } else {
+        if (containsRowCol) {
             board[row][col] = "x";
-            console.log(board);
             computerMakesMove();
         }
         win(availableMoves);
@@ -51,7 +46,6 @@ const gameBoard = (function () {
 
     function computerMakesMove() {
         const availableMoves = listAvailableMoves();
-        console.log(availableMoves);
         let containsRowCol = [];
         computerMove = [];
         let randomRow = 0;
@@ -63,13 +57,11 @@ const gameBoard = (function () {
                 randomCol = Math.floor(Math.random()*3);
                 containsRowCol = availableMoves.some((pair) => pair[0] === randomRow && pair[1] === randomCol);
             } while (!containsRowCol);
-            console.log(randomRow, randomCol);
             board[randomRow][randomCol] = "o";
             cMakeMove (randomRow,randomCol);
         }
 
         win(availableMoves);
-        console.log(board);
     }
 
     function win() {
@@ -117,10 +109,6 @@ const gameBoard = (function () {
     //     return player;
     // }
 
-
-    console.log(cells);
-
-
     function uMakeMove (e) {
         const availableMoves = listAvailableMoves();
         let rowIndex = 0;
@@ -146,8 +134,6 @@ const gameBoard = (function () {
                 e.target.textContent = "X";
             }
         });
-
-
     }
 
     function cMakeMove (row,col) {
