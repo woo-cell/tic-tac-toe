@@ -1,8 +1,11 @@
 const gameBoard = (function () {
+    const cellContainer =  document.querySelector(".cell-container");
     const cells = document.querySelectorAll(".cell-container > div");
     const dialog = document.querySelector("dialog");
     const modalText = document.querySelector("dialog > p");
     const restartButton = document.getElementById("restart-btn");
+    const startButton = document.getElementById("start-btn");
+    const resetButton = document.getElementById("reset-btn");
 
     // creating the board
     const board = [
@@ -29,7 +32,7 @@ const gameBoard = (function () {
             board[row][col] = "x";
             computerMakesMove();
         }
-        win(availableMoves);
+        win();
     }
 
     function listAvailableMoves () {
@@ -51,7 +54,7 @@ const gameBoard = (function () {
         let randomRow = 0;
         let randomCol = 0;
 
-        if (availableMoves[0]) {
+        if (availableMoves[0] && !win()) {
             do {
                 randomRow = Math.floor(Math.random()*3);
                 randomCol = Math.floor(Math.random()*3);
@@ -61,7 +64,7 @@ const gameBoard = (function () {
             cMakeMove (randomRow,randomCol);
         }
 
-        win(availableMoves);
+        ;
     }
 
     function win() {
@@ -103,9 +106,9 @@ const gameBoard = (function () {
         cells.forEach((cell) => cell.textContent = "");       
     }
 
-    // creating player not necessry now
-    // function createPlayer () {
-    //     const player = {playerLetter:"x" }
+
+    // function createPlayer (name) {
+    //     const player = {name};
     //     return player;
     // }
 
@@ -158,6 +161,12 @@ const gameBoard = (function () {
         }
     }
 
+    function toggleClassHide(e) {
+        cellContainer.classList.toggle("hide");
+        e.target.classList.toggle("hide");
+        resetButton.classList.toggle("hide");
+    }
+
     cells.forEach((cell) => cell.addEventListener("click", uMakeMove));
 
     restartButton.addEventListener("click", () => {
@@ -171,6 +180,11 @@ const gameBoard = (function () {
         }
     });
 
+    startButton.addEventListener("click", toggleClassHide);
+    resetButton.addEventListener("click", () => {
+        dialog.close();
+        resetBoard();
+    });
     // return {board,createPlayer,playerMakesMove,listAvailableMoves};
 })();
 

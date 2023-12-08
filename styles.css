@@ -7,6 +7,8 @@
     font-size: 5rem;
 }
 
+
+
 .cell-container {
     height: 240px;
     width: 240px;
@@ -57,4 +59,18 @@ dialog > button:hover {
 
 dialog::backdrop {
     backdrop-filter: blur(4px);
+}
+
+.hide {
+    display: none;
+}
+
+#reset-btn {
+    margin-top: 40px;
+    padding: 10px;
+}
+
+#start-btn {
+    margin-top: 40px;
+    padding: 10px;
 }
